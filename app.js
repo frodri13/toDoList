@@ -1,12 +1,12 @@
 // Selectors
 const todoInput = document.querySelector(".todo-input");
 const todoButton = document.querySelector(".todo-button");
-const todolist = document.querySelector(".todo-list");
-
+const todoList = document.querySelector(".todo-list");
+const filterOption = document.querySelector(".filter-todo");
 // Event Listeners
 todoButton.addEventListener("click", addTodo);
-todolist.addEventListener("click", deleteCheck);
-
+todoList.addEventListener("click", deleteCheck);
+filterOption.addEventListener("change", filterTodo);
 // Functions
 
 function addTodo(event) {
@@ -31,7 +31,7 @@ function addTodo(event) {
   trashButton.classList.add("trash-btn");
   todoDiv.appendChild(trashButton);
   // Append to list
-  todolist.appendChild(todoDiv);
+  todoList.appendChild(todoDiv);
   // clear todo input value
   todoInput.value = "";
 }
@@ -40,15 +40,42 @@ function deleteCheck(e) {
   const item = e.target;
   //delete
   if (item.classList[0] === "trash-btn") {
-    const todo = item.parentElement;
-    todo.classList.add("fall");
-    todo.addEventListener("transitionend", function () {
-      todo.remove();
+    const todos = item.parentElement;
+    todos.classList.add("fall");
+    todos.addEventListener("transitionend", function () {
+      todos.remove();
     });
   }
   //check
   if (item.classList[0] === "complete-btn") {
-    const todo = item.parentElement;
-    todo.classList.toggle("completed");
+    const todos = item.parentElement;
+    todos.classList.toggle("completed");
   }
+}
+
+// filtering
+function filterTodo(e) {
+  const todos = todoList.childNodes;
+  console.log(todos);
+  todos.forEach(function (todo) {
+    switch (e.target.value) {
+      case "all":
+        todo.style.display = "flex";
+        break;
+      case "completed":
+        if (todo.classList.contains("completed")) {
+          todo.style.display = "flex";
+        } else {
+          todo.style.display = "none";
+        }
+        break;
+      case "ongoing":
+        if (!todo.classList.contains("completed")) {
+          todo.style.display = "flex";
+        } else {
+          todo.style.display = "none";
+        }
+        break;
+    }
+  });
 }
