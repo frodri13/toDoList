@@ -6,8 +6,8 @@ This ToDo app was built using HTML, CSS and Vanilla JavaScript. It was built as 
 
 ## How to run?
 
-Since this was a simple exercise on Vanilla JS, I am only running it using the `open with live server` plugin from VS Code.
+This project is currently being hosted in Netlify on `https://angry-snyder-1dba2a.netlify.app/`
 
 ## Storage
 
-The todods are beign kept in LocalStorage.
+The todos are beign kept in LocalStorage.
